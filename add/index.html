@@ -636,7 +636,7 @@
             return;
         }
 
-        if (list.length <= INLINE_THRESHOLD) {
+        if (list.length >= INLINE_THRESHOLD) {
             // Inline chips
             inlineEl.style.display = 'block';
             drawerEl.style.display = 'none';
