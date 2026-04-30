@@ -82,6 +82,22 @@
             "foreign": false,
             "world": "world",
             "position": {
+                "x": -4055.0,
+                "y": 75.0,
+                "z": -277.0
+            },
+            "rotation": {
+                "yaw": 0.0,
+                "pitch": 1.47,
+                "roll": 1.01
+            }
+        },
+         {
+            "uuid": "11111123-2222-3333-4444-595555555555",
+            "name": "Badboy Anand",
+            "foreign": false,
+            "world": "world",
+            "position": {
                 "x": -3554.0,
                 "y": 68.0,
                 "z": -316.0
