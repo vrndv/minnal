@@ -50,9 +50,9 @@
             "name": "Darsan0069",
             "foreign": false,
             "position": {
-                "x": -3559.0,
-                "y": 74.0,
-                "z": -348.0
+                "x": -3557.0,
+                "y": 73.0,
+                "z": -365.0
             },
             "rotation": {
                 "pitch": 0.65,
@@ -69,6 +69,22 @@
                 "x": -3796.0,
                 "y": 65.0,
                 "z": -600.0
+            },
+            "rotation": {
+                "yaw": 0.0,
+                "pitch": 1.47,
+                "roll": 1.01
+            }
+        },
+        {
+            "uuid": "11111122-2222-3333-4444-595555555555",
+            "name": "DrDangerTintu",
+            "foreign": false,
+            "world": "world",
+            "position": {
+                "x": -3554.0,
+                "y": 68.0,
+                "z": -316.0
             },
             "rotation": {
                 "yaw": 0.0,
