@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/maps/world/live/players.json"
+  to = "https://minnal-bv7l.onrender.com/maps/world/live/players.json"
+  status = 200
+  force = true
