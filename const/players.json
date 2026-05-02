@@ -1,0 +1,96 @@
+{
+    "players": [
+        {
+            "uuid": " 00000000-0000-0000-0009-01fe50e4e109",
+            "name": "VarunGG",
+            "foreign": false,
+            "position": {
+                "x": -4138.0,
+                "y": 72.0,
+                "z": -347.0
+            },
+            "rotation": {
+                "pitch": 1.6,
+                "yaw": 0.0,
+                "roll": 1.1
+            }
+        },
+        {
+            "uuid": "60d728c2-8872-3e0f-bfce-b3c42b8e9d07",
+            "name": "vrndv",
+            "foreign": false,
+            "position": {
+                "x": -4143.0,
+                "y": 71.0,
+                "z": -491.0
+            },
+            "rotation": {
+                "pitch": 0.0,
+                "yaw": 5.0,
+                "roll": 0.0
+            }
+        },
+        {
+            "uuid": "2535407606641714",
+            "name": "Ujwalujju",
+            "foreign": false,
+            "position": {
+                "x": -4006.0,
+                "y": 68.0,
+                "z": -818.0
+            },
+            "rotation": {
+                "pitch": -1.53,
+                "yaw": 0.0,
+                "roll": 1.75
+            }
+        },
+        {
+            "uuid": "11111111-2222-3333-4444-555555555555",
+            "name": "Darsan0069",
+            "foreign": false,
+            "position": {
+                "x": -3557.0,
+                "y": 73.0,
+                "z": -365.0
+            },
+            "rotation": {
+                "pitch": 0.65,
+                "yaw": 0.0,
+                "roll": 1.03
+            }
+        },
+        {
+            "uuid": "11111111-2222-3333-4444-595555555555",
+            "name": "MadhavGG5921",
+            "foreign": false,
+            "world": "world",
+            "position": {
+                "x": -3796.0,
+                "y": 65.0,
+                "z": -600.0
+            },
+            "rotation": {
+                "yaw": 0.0,
+                "pitch": 1.47,
+                "roll": 1.01
+            }
+        },
+        {
+            "uuid": "11111122-2222-3333-4444-595555555555",
+            "name": "DrDangerTintu",
+            "foreign": false,
+            "world": "world",
+            "position": {
+                "x": -3554.0,
+                "y": 68.0,
+                "z": -316.0
+            },
+            "rotation": {
+                "yaw": 0.0,
+                "pitch": 1.47,
+                "roll": 1.01
+            }
+        }
+    ]
+}
