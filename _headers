@@ -1,0 +1,5 @@
+/maps/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/maps/world/tiles/*
+  Cache-Control: public, max-age=0, must-revalidate
