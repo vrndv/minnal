@@ -56,13 +56,13 @@ app.post("/players", (req, res) => {
       }))
     };
 
-    // ⚠️ YOUR EXACT PATH (maps/maps/world)
-    const outPath = path.join(ROOT, "maps", "world", "players.json");
+    // ✅ FIXED: includes /live/ subdirectory
+    const outPath = path.join(ROOT, "maps", "world", "live", "players.json");
 
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.writeFileSync(outPath, JSON.stringify(formatted, null, 4));
 
-    console.log("✔ players.json updated at maps/maps/world/");
+    console.log("✔ players.json updated at maps/maps/world/live/");
 
     res.sendStatus(200);
   } catch (err) {
