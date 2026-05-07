@@ -28,14 +28,12 @@ function mime(file) {
 }
 
 // =======================
-// RECEIVE PLAYER DATA
+// HELPER: write players.json for a given world
 // =======================
-app.post("/players", (req, res) => {
+function writePlayers(worldDir, players, res, label) {
   try {
-    const players = req.body;
-
     if (!Array.isArray(players)) {
-      return res.status(400).send("Invalid data");
+      return res.status(400).send("Invalid data: expected an array");
     }
 
     const formatted = {
@@ -56,19 +54,37 @@ app.post("/players", (req, res) => {
       }))
     };
 
-    // ✅ FIXED: includes /live/ subdirectory
-    const outPath = path.join(ROOT, "maps", "world", "live", "players.json");
-
+    const outPath = path.join(ROOT, worldDir, "live", "players.json");
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.writeFileSync(outPath, JSON.stringify(formatted, null, 4));
 
-    console.log("✔ players.json updated at maps/maps/world/live/");
-
+    console.log(`✔ players.json updated at maps/${worldDir}/live/ (${label})`);
     res.sendStatus(200);
   } catch (err) {
-    console.error("❌ Error:", err);
+    console.error(`❌ Error writing ${label}:`, err);
     res.status(500).send("Server error");
   }
+}
+
+// =======================
+// RECEIVE PLAYER DATA — Overworld
+// =======================
+app.post("/players", (req, res) => {
+  writePlayers("world", req.body, res, "overworld");
+});
+
+// =======================
+// RECEIVE PLAYER DATA — Nether
+// =======================
+app.post("/nether", (req, res) => {
+  writePlayers("world_nether", req.body, res, "nether");
+});
+
+// =======================
+// RECEIVE PLAYER DATA — The End
+// =======================
+app.post("/end", (req, res) => {
+  writePlayers("world_the_end", req.body, res, "end");
 });
 
 // =======================
