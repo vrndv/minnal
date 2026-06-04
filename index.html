@@ -2,14 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=/minnal-map">
-    <title>Redirecting...</title>
-
-    <script>
-        window.location.href = "https://maps.varundev.tech";
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minnal SMP - Community Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Redirecting to <a href="/minnal-map">/Minnal SMP MAP</a>...</p>
+    <div class="bg-layer" id="bg-layer"></div>
+    
+    <main class="menu-container">
+        <header class="hero">
+            <h2 class="subtitle">Community Hub</h2>
+            <h1 class="title">Minnal SMP</h1>
+            <p class="description">Choose a destination</p>
+        </header>
+
+        <nav class="button-grid" id="button-grid">
+            <a href="https://maps.varundev.tech/#world:-3788:0:-603:667:0:0:0:0:perspective" class="menu-button">
+                <div class="button-icon"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/bluemap.png" class="icon-image"></div>
+                <div class="button-content">
+                    <h3>Live Map</h3>
+                    <p>Explore the world in BlueMap</p>
+                </div>
+            </a>
+            
+            <a href="https://varundev.tech/minnal-stats" class="menu-button">
+                 <div class="button-icon"><img src="https://media.forgecdn.net/avatars/thumbnails/1205/182/256/256/638783242226915605.png" class="icon-image"></div>
+                <div class="button-content">
+                    <h3>Player Stats</h3>
+                    <p>View player statistics and leaderboards</p>
+                </div>
+            </a>
+            
+            <a href="https://varundev.tech/minnal/maps/add" class="menu-button">
+                 <div class="button-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReC1tG6RSIBDRzBTrsDh1WVB8U84VF9Qtnaw&s" class="icon-image"></div>
+                <div class="button-content">
+                    <h3>Server Status</h3>
+                    <p>Check server status and online players</p>
+                </div>
+            </a>
+            
+            <a href="https://project-tracker-zeta-dun.vercel.app/projects" class="menu-button">
+                <div class="button-icon"><img src="https://media.forgecdn.net/avatars/thumbnails/1475/609/256/256/638957933792701134.png" class="icon-image"></div>
+                <div class="button-content">
+                    <h3>Project Tracker</h3>
+                    <p>Track community projects and progress</p>
+                </div>
+            </a>
+        </nav>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
