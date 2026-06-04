@@ -313,6 +313,15 @@
             font-size: 0.72rem;
             font-weight: 600;
             color: #d0f5e3;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .player-chip:hover {
+            background: rgba(46, 204, 113, 0.15);
+            border-color: rgba(46, 204, 113, 0.3);
+            transform: translateY(-1px);
         }
 
         .player-avatar {
@@ -408,8 +417,17 @@
             display: flex;
             align-items: center;
             gap: 9px;
-            padding: 5px 2px;
+            padding: 5px 6px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s ease, border-radius 0.2s ease;
+        }
+
+        .drawer-player-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            border-bottom-color: transparent;
         }
 
         .drawer-player-row:last-child {
@@ -782,7 +800,6 @@
 
     <div class="card">
 
-        <!-- Header -->
         <div class="header">
             <img class="server-icon skeleton" id="serverIcon" src="" alt="Server Icon"
                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\'%3E%3Crect width=\'64\' height=\'64\' fill=\'%23111\'/%3E%3C/svg%3E'">
@@ -792,7 +809,6 @@
             </div>
         </div>
 
-        <!-- Status -->
         <div class="status-bar">
             <span class="status-badge loading" id="statusBadge">
                 <span class="dot"></span>
@@ -801,7 +817,6 @@
             <span class="version-tag" id="versionTag">—</span>
         </div>
 
-        <!-- Stats -->
         <div class="stats-row">
             <div class="stat-box">
                 <div class="stat-label">Players Online</div>
@@ -818,14 +833,12 @@
             </div>
         </div>
 
-        <!-- Players: inline (≤3) -->
         <div class="players-inline" id="playersInline">
             <div class="stat-label">Who's Online</div>
             <div class="player-chips" id="playerChips"></div>
         </div>
 
-        <!-- Players: drawer (>3) -->
-        <button class="players-drawer-trigger" id="playersDrawer" onclick="toggleDrawer()">
+        <div class="players-drawer-trigger" id="playersDrawer" onclick="toggleDrawer()" role="button" tabindex="0">
             <div class="drawer-header">
                 <div class="drawer-header-left">
                     <span class="stat-label" style="margin:0;">Who's Online</span>
@@ -838,9 +851,8 @@
             <div class="drawer-body" id="drawerBody">
                 <div class="drawer-list" id="drawerList"></div>
             </div>
-        </button>
+        </div>
 
-        <!-- IP -->
         <div class="ip-box">
             <div class="ip-label">Server Address</div>
             <div class="ip-row">
@@ -857,7 +869,6 @@
             </div>
         </div>
 
-        <!-- CTA -->
         <a href="minecraft://?addExternalServer=Minnal%20Reborn|141.11.113.68:25598" class="btn">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -868,21 +879,17 @@
             Add to <span class="btn-mc">MINECRAFT</span>
         </a>
 
-        <!-- Bottom bar -->
         <div class="bottom-bar">
-            <!-- Discord + Map icons -->
             <div class="icon-links">
                 <a href="https://discord.gg/rMJRY65QF" class="icon-link discord" data-tip="Discord"
                     aria-label="Join Discord">
-                    <!-- Discord logo SVG -->
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
                     </svg>
                 </a>
-                <a href="https://varundev.tech/minnal" class="icon-link map" data-tip="Live Map"
+                <a href="https://maps.varundev.tech" class="icon-link map" data-tip="Live Map"
                     aria-label="View Live Map">
-                    <!-- Map/Globe icon -->
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" />
                         <line x1="2" y1="12" x2="22" y2="12" />
@@ -892,7 +899,6 @@
                 </a>
             </div>
 
-            <!-- Right: fallback text + refresh -->
             <div class="right-controls">
                 <button class="refresh-btn" id="refreshBtn">
                     <svg viewBox="0 0 24 24">
@@ -982,8 +988,11 @@
                     const avatarSrc = uuid
                         ? `https://tabavatars.net/avatar/?username=${name}`
                         : `https://tabavatars.net/avatar/?username=${name}`;
-                    const chip = document.createElement('div');
+                    
+                    // Modified to Anchor tag
+                    const chip = document.createElement('a');
                     chip.className = 'player-chip';
+                    chip.href = `https://domain.com/minnal-stats/?player=${encodeURIComponent(name)}`;
                     chip.innerHTML = `<img class="player-avatar" src="${avatarSrc}" alt="${name}" onerror="this.style.display='none'"> ${name}`;
                     chipsEl.appendChild(chip);
                 });
@@ -1000,8 +1009,15 @@
                     const avatarSrc = uuid
                         ? `https://tabavatars.net/avatar/?username=${name}`
                         : `https://tabavatars.net/avatar/?username=${name}`;
-                    const row = document.createElement('div');
+                    
+                    // Modified to Anchor tag
+                    const row = document.createElement('a');
                     row.className = 'drawer-player-row';
+                    row.href = `https://domain.com/minnal-stats/?player=${encodeURIComponent(name)}`;
+                    
+                    // Prevent the click event from bubbling up and triggering toggleDrawer()
+                    row.onclick = (e) => e.stopPropagation(); 
+                    
                     row.innerHTML = `
                     <img class="drawer-avatar" src="${avatarSrc}" alt="${name}" onerror="this.style.display='none'">
                     <span class="drawer-player-name">${name}</span>
@@ -1046,8 +1062,6 @@
         document.getElementById('refreshBtn').addEventListener('click', fetchStatus);
 
         fetchStatus();
-
-
 
 
         let intervalId = null;
