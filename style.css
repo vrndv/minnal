@@ -180,4 +180,8 @@ body {
     .button-grid {
         grid-template-columns: 1fr;
     }
+    .button-icon {
+        background: none;
+        border: none;
+    }
 }
