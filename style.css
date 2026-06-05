@@ -19,7 +19,8 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-main);
-    overflow: hidden; /* Prevents scrollbars during parallax */
+    overflow: hidden;
+    /* Prevents scrollbars during parallax */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -102,16 +103,18 @@ body {
     text-decoration: none;
     color: var(--text-main);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0; /* Handled by JS for staggered entrance */
+    opacity: 0;
+    /* Handled by JS for staggered entrance */
     transform: translateY(20px);
 }
+
 .icon-image {
     width: 40px;
     height: 40px;
     border-radius: 20%;
     object-fit: inherit;
     display: block;
-} 
+}
 
 .button-icon {
     font-size: 2.5rem;
@@ -146,7 +149,7 @@ body {
     background: rgba(30, 41, 59, 0.8);
     border-color: var(--accent);
     box-shadow: 0 10px 30px -10px var(--accent-glow),
-                inset 0 0 20px -10px var(--accent-glow);
+        inset 0 0 20px -10px var(--accent-glow);
 }
 
 .menu-button:hover .button-icon {
@@ -165,6 +168,7 @@ body {
         opacity: 0;
         transform: translateY(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -176,12 +180,20 @@ body {
     .title {
         font-size: 3rem;
     }
-    
+
     .button-grid {
         grid-template-columns: 1fr;
     }
+
     .button-icon {
         background: none;
         border: none;
+    }
+
+    .bg-layer {
+        background-image: url('https://i.makeagif.com/media/9-12-2022/TJOalX.gif');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 40% center;
     }
 }
