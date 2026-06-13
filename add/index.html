@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minnal Reborn - Minecraft Server</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #2ecc71;
+            --green-dark: #27ae60;
+            --green-glow: rgba(46, 204, 113, 0.35);
+            --red: #e74c3c;
+            --discord: #5865F2;
+            --card-bg: rgba(10, 11, 15, 0.72);
+            --border: rgba(255, 255, 255, 0.09);
+            --text: #ffffff;
+            --muted: #8a8f9e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #090a0e;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -10px;
+            background: url('https://wallpapercave.com/wp/wp5961273.jpg') center/cover no-repeat;
+            filter: blur(3px) brightness(0.4);
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.06) 2px, rgba(0, 0, 0, 0.06) 4px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 38px 28px 28px;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.45s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Header ── */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .server-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            image-rendering: pixelated;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .server-icon.skeleton {
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .title-group {
+            text-align: left;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .server-title {
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 1.65rem;
+            background: linear-gradient(135deg, #fff 40%, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .motd {
+            font-size: 0.78rem;
+            margin-top: 5px;
+            font-family: 'Minecraftia', monospace;
+            line-height: 1.4;
+            min-height: 1.1em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ── Status row ── */
+        .status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            gap: 8px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .status-badge.online {
+            background: rgba(46, 204, 113, 0.12);
+            border-color: rgba(46, 204, 113, 0.3);
+            color: var(--green);
+        }
+
+        .status-badge.offline {
+            background: rgba(231, 76, 60, 0.12);
+            border-color: rgba(231, 76, 60, 0.3);
+            color: var(--red);
+        }
+
+        .status-badge.loading {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border);
+            color: var(--muted);
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .status-badge.online .dot {
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.22);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+        .version-tag {
+            font-size: 0.72rem;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        /* ── Stats grid ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 15px;
+        }
+
+        .stat-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .stat-value.green {
+            color: var(--green);
+        }
+
+        .player-bar-wrap {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 2px;
+            margin-top: 7px;
+            overflow: hidden;
+        }
+
+        .player-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--green), var(--green-dark));
+            width: 0%;
+            transition: width 0.9s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .stat-sub {
+            font-size: 0.68rem;
+            color: var(--muted);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* ── Players section (inline ≤3) ── */
+        .players-inline {
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 11px 14px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .players-inline .stat-label {
+            margin-bottom: 8px;
+        }
+
+        .player-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .player-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(46, 204, 113, 0.08);
+            border: 1px solid rgba(46, 204, 113, 0.18);
+            border-radius: 999px;
+            padding: 4px 10px 4px 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #d0f5e3;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .player-chip:hover {
+            background: rgba(46, 204, 113, 0.15);
+            border-color: rgba(46, 204, 113, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .player-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            image-rendering: pixelated;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ── Players drawer (>3) ── */
+        .players-drawer-trigger {
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 11px 14px;
+            margin-bottom: 12px;
+            display: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            transition: border-color 0.2s ease;
+        }
+
+        .players-drawer-trigger:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .drawer-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drawer-count-badge {
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid rgba(46, 204, 113, 0.25);
+            color: var(--green);
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+
+        .drawer-chevron {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: var(--muted);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.3s ease, stroke 0.2s;
+            flex-shrink: 0;
+        }
+
+        .players-drawer-trigger:hover .drawer-chevron {
+            stroke: var(--text);
+        }
+
+        .players-drawer-trigger.open .drawer-chevron {
+            transform: rotate(180deg);
+        }
+
+        .drawer-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .drawer-body.open {
+            max-height: 300px;
+        }
+
+        .drawer-list {
+            padding-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            overflow-y: auto;
+            max-height: 200px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        .drawer-player-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 5px 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s ease, border-radius 0.2s ease;
+        }
+
+        .drawer-player-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            border-bottom-color: transparent;
+        }
+
+        .drawer-player-row:last-child {
+            border-bottom: none;
+        }
+
+        .drawer-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 5px;
+            image-rendering: pixelated;
+            background: rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+        }
+
+        .drawer-player-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #d8f5e8;
+            flex: 1;
+        }
+
+        .online-pip {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 4px var(--green);
+            flex-shrink: 0;
+        }
+
+        /* ── IP box ── */
+        .ip-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 15px;
+            margin-bottom: 14px;
+        }
+
+        .ip-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            color: var(--muted);
+            margin-bottom: 7px;
+        }
+
+        .ip-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .ip-value {
+            font-family: monospace;
+            font-size: 1rem;
+            color: var(--text);
+            letter-spacing: 0.4px;
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(6px);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            position: relative;
+            outline: none;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.13);
+            border-color: rgba(46, 204, 113, 0.5);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+            transform: scale(1.08);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.94);
+        }
+
+        .copy-btn.copied {
+            background: rgba(46, 204, 113, 0.18);
+            border-color: rgba(46, 204, 113, 0.6);
+        }
+
+        .copy-btn svg {
+            width: 15px;
+            height: 15px;
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.7);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            position: absolute;
+            transition: opacity 0.15s ease, stroke 0.2s ease;
+        }
+
+        .copy-btn:hover svg {
+            stroke: var(--green);
+        }
+
+        .copy-btn.copied .icon-copy {
+            opacity: 0;
+        }
+
+        .copy-btn .icon-check {
+            opacity: 0;
+            stroke: var(--green);
+        }
+
+        .copy-btn.copied .icon-check {
+            opacity: 1;
+        }
+
+        .copy-btn::after {
+            content: "Copied!";
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: var(--green);
+            color: #fff;
+            font-size: 0.66rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .copy-btn.copied::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ── CTA ── */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 24px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 24px var(--green-glow);
+            margin-bottom: 16px;
+            user-select: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(46, 204, 113, 0.5);
+            filter: brightness(1.08);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-mc {
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        /* ── Bottom bar ── */
+        .bottom-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding-top: 4px;
+        }
+
+        .icon-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .icon-link svg {
+            width: 17px;
+            height: 17px;
+            transition: all 0.2s ease;
+        }
+
+        .icon-link.discord svg {
+            fill: #7289da;
+        }
+
+        .icon-link.discord:hover {
+            background: rgba(88, 101, 242, 0.15);
+            border-color: rgba(88, 101, 242, 0.4);
+            box-shadow: 0 0 12px rgba(88, 101, 242, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .icon-link.discord:hover svg {
+            fill: #5865F2;
+        }
+
+        .icon-link.map svg {
+            fill: none;
+            stroke: var(--muted);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-link.map:hover {
+            background: rgba(46, 204, 113, 0.1);
+            border-color: rgba(46, 204, 113, 0.35);
+            box-shadow: 0 0 12px rgba(46, 204, 113, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .icon-link.map:hover svg {
+            stroke: var(--green);
+        }
+
+        /* tooltip */
+        .icon-link::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: rgba(20, 22, 28, 0.95);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+            border: 1px solid var(--border);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+
+        .icon-link:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fallback {
+            color: #5a5f6e;
+            font-size: 0.72rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .refresh-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 6px 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            white-space: nowrap;
+        }
+
+        .refresh-btn:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .refresh-btn svg {
+            width: 11px;
+            height: 11px;
+            fi
